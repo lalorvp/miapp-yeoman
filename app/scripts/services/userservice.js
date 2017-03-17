@@ -10,56 +10,56 @@
 angular.module('miappApp')
   .service('UserService', function (Config, $q, $http, $cookies) {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    function login(params){
-    	var deferred = $q.defer();
-    	$http.post(Config.BASE + Config.LOGIN, params)
-    		.then(function(response){
-    			deferred.resolve(response);
-    		});
+    function login(params) {
+      var deferred = $q.defer();
+      $http.post(Config.BASE + Config.LOGIN, params)
+        .then(function (response) {
+          deferred.resolve(response);
+        });
 
-    	return deferred.promise;
+      return deferred.promise;
     }
 
-    function listado(params){
-    	var deferred = $q.defer();
+    function listado(params) {
+      var deferred = $q.defer();
 
-    	var token = $cookies.get('token');
-    	var config = {
-    		headers:{
-    			'Authorization':'JWT ' + token,
-    		}
-    	}
+      var token = $cookies.get('token');
+      var config = {
+        headers: {
+          'Authorization': 'JWT ' + token,
+        }
+      }
 
-    	$http.get(Config.BASE + Config.USERS, config)
-    		.then(function(response){
-    			deferred.resolve(response);
-    		});
-    		
-    	return deferred.promise;
+      $http.get(Config.BASE + Config.USERS, config)
+        .then(function (response) {
+          deferred.resolve(response);
+        });
+
+      return deferred.promise;
     }
 
-    function registrar(params){
-    	var deferred = $q.defer();
+    function registrar(params) {
+      var deferred = $q.defer();
 
-    	var token = $cookies.get('token');
-    	var config = {
-    		headers:{
-    			'Authorization':'JWT ' + token,
-    		}
-    	}
+      var token = $cookies.get('token');
+      var config = {
+        headers: {
+          'Authorization': 'JWT ' + token,
+        }
+      }
 
-    	$http.post(Config.BASE + Config.USERS, params, config)
-    		.then(function(response){
-    			deferred.resolve(response);
-    		});
-    		
-    	return deferred.promise;
+      $http.post(Config.BASE + Config.USERS, params, config)
+        .then(function (response) {
+          deferred.resolve(response);
+        });
+
+      return deferred.promise;
     }
 
-    return{
-    	login: login,
-    	listado: listado,
-    	registrar: registrar,
+    return {
+      login: login,
+      listado: listado,
+      registrar: registrar,
     }
 
   });
